@@ -170,19 +170,20 @@ def select_option(students):
     print("[3] Print data for SWE students.")
     print("[4] Print data for SWE students, by groups.")
     print("[5] Print data for SWE students, by groups, sorted by Accepted Cnt.")
+    print("[6] Search.")
     try:
-        val = int(input())
+        val = input()
     except:
         print("Please enter the number of one of the given options!")
         select_option(students)
-    if val == 0:
+    if val == "0":
         exit()
-    elif val == 1:
+    elif val == "1":
         for s in students:
             print(s)
         save_as_file("All students data", students)
         print("-" * 100)
-    elif val == 2:
+    elif val == "2":
         tmp_students = []
         for s in students:
             if '20' in (s.get('Group')):
@@ -190,7 +191,7 @@ def select_option(students):
                 tmp_students.append(s)
         save_as_file("2020 ACM Competitors", tmp_students)
         print("-" * 100)
-    elif val == 3:
+    elif val == "3":
         tmp_students = []
         for s in students:
             if 'SWE20' in (s.get('Group')):
@@ -198,7 +199,7 @@ def select_option(students):
                 tmp_students.append(s)
         save_as_file("SWE20 ACM Competitors", tmp_students)
         print("-" * 100)
-    elif val == 4:
+    elif val == "4":
         tmp_students = []
         for s in students:
             if 'SWE20' in (s.get('Group')):
@@ -208,7 +209,7 @@ def select_option(students):
         print(table)
         save_as_file("SWE20 ACM By Groups", table)
         print("-" * 100)
-    elif val == 5:
+    elif val == "5":
         tmp_students = []
         for s in students:
             if 'SWE20' in (s.get('Group')):
@@ -217,6 +218,15 @@ def select_option(students):
         table = create_sorted_table(groups_data)
         print(table)
         save_as_file("SWE20 ACM By Groups - Sorted", table)
+        print("-" * 100)
+    elif val == "6":
+        key=input("Enter keyword: ").lower().replace("ç", "c").replace("ë", "e")
+        tmp_students = []
+        for s in students:
+            if (key in str(s.get('Group')).lower().replace("ç", "c").replace("ë", "e")) or (key in str(s.get('Name')).lower().replace("ç", "c").replace("ë", "e")):
+                tmp_students.append(s)
+                print(s)
+        save_as_file("Search Results", tmp_students)
         print("-" * 100)
     else:
         print("Please enter the number of one of the given options!")
